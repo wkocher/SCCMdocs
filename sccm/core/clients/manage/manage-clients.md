@@ -339,6 +339,10 @@ Providing a list of hardware identifiers that Configuration Manager ignores for 
 2. On the **Home** tab, in the **Sites** group, choose **Hierarchy Settings**.
 3. On the **Client Approval and Conflicting Records** tab, choose **Add** in the **Duplicate hardware identifiers** section to add new hardware identifiers.
 
+Using wildcards to exclude multiple hardware identifiers is only possible via SDK. For example:
+Set-WMIInstance -computerName "<CAS or Primary Site Server>" -Namespace root\sms\Site_<SiteCode> -Class SMS_CommonMacAddresses -Argument @{MACAddress='00:11:22:33:44:%'}
+will exclude all MAC Addresses beginning with 00:11:22:33:44 from PXE device lookups. For SMBIOS Guid excusions the WMI class name to use is SMS_CommonSmbiosGuids.
+
 ##  <a name="BKMK_PolicyRetrieval"></a> Initiate Policy Retrieval for a Configuration Manager Client  
  A Windows Configuration Manager client downloads its client policy on a schedule that you configure as a client setting. However, there might be occasions when you want to initiate on-demand policy retrieval from the client, for example, for troubleshooting or testing.  
 
